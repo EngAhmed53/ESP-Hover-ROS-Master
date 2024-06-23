@@ -1,0 +1,23 @@
+<!-- Example ROS launch file for drone system -->
+<launch>
+    <!-- Set ROS parameters -->
+    <param name="joy_node/autorepeat_rate" value="10.0"/>
+
+    <!-- Launch the drone controller node -->
+    <node name="drone_controller" pkg="drone_controller" type="drone_controller" output="screen"/>
+
+    <!-- Launch the joystick node -->
+    <node name="joy_node" pkg="joy" type="joy_node" output="screen"/>
+
+    <!-- Launch rqt_ez_publisher for easy message publishing via GUI -->
+    <node name="rqt_ez_publisher" pkg="rqt_ez_publisher" type="rqt_ez_publisher" output="screen"/>
+
+    <!-- Launch the rosserial server for connecting with external devices -->
+    <node name="socket_node" pkg="rosserial_server" type="socket_node" output="screen">
+        <param name="port" value="11411"/>
+    </node>
+
+    <!-- Launch rqt_multiplot for real-time plotting -->
+    <node name="rqt_multiplot" pkg="rqt_multiplot" type="rqt_multiplot" output="screen"/>
+
+</launch>
